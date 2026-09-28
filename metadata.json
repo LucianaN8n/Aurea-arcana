@@ -1,0 +1,6 @@
+{
+  "name": "Aurea Arcana — Portal de Simbologia, Ocultismo e Prosperidade",
+  "description": "Portal brasileiro de estudos esotéricos, grimórios digitais, conhecimentos tradicionais sobre Exu, pemba, ervas, magia planetária e rituais coletivos de prosperidade e abertura de caminhos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

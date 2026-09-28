@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin-config
+
+Sitemap: https://aureaarcana.com.br/sitemap.xml
