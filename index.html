@@ -59,6 +59,14 @@
   <body class="bg-[#07080C] text-[#F4EFE6] antialiased selection:bg-[#D4AF37]/30 selection:text-[#F4EFE6]">
     <div id="root"></div>
     <script type="module" src="./src/main.tsx"></script>
+    <script>
+      if (
+        window.location.hostname.endsWith('github.io') &&
+        document.querySelector('script[src="./src/main.tsx"]')
+      ) {
+        window.location.replace('./docs/' + window.location.search + window.location.hash);
+      }
+    </script>
   </body>
 </html>
 
