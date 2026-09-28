@@ -18,7 +18,7 @@ import {
 import { ProductItem } from '../data/products';
 import { unlockEbookWithVerifiedPayment } from '../data/ebookMagiasExu';
 import { trackEvent } from '../utils/analytics';
-import { SITE_CONFIG, getWhatsAppLink } from '../data/siteConfig';
+import { SITE_CONFIG } from '../data/siteConfig';
 
 export interface CheckoutItemConfig {
   id: string;
@@ -819,25 +819,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   Seus Dados de Altar Foram Registrados
                 </p>
                 <p className="mt-1 text-xs text-[#A6A29A]">
-                  Se desejar receber também as atualizações pelo WhatsApp ou e-mail ({SITE_CONFIG.contactEmail}), clique abaixo:
+                  Se desejar encaminhar a confirmação também para o e-mail da Chancelaria ({SITE_CONFIG.contactEmail}), clique abaixo:
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2.5">
-                  <a
-                    href={getWhatsAppLink(whatsappSummaryMessage)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 bg-[#D4AF37] px-4 py-2 text-xs font-semibold text-[#07080C] hover:bg-[#E5C158]"
-                  >
-                    <Sparkles className="h-3.5 w-3.5" />
-                    <span>CONFIRMAR PELO WHATSAPP</span>
-                  </a>
                   <a
                     href={`mailto:${SITE_CONFIG.contactEmail}?subject=${encodeURIComponent(
                       `Inscrição Ritual - ${item.title}`
                     )}&body=${encodeURIComponent(whatsappSummaryMessage)}`}
-                    className="inline-flex items-center gap-1.5 border border-[#D4AF37]/40 px-4 py-2 text-xs font-semibold text-[#F4EFE6] hover:border-[#D4AF37]"
+                    className="inline-flex items-center gap-1.5 bg-[#D4AF37] px-4 py-2 text-xs font-semibold text-[#07080C] hover:bg-[#E5C158]"
                   >
-                    <Mail className="h-3.5 w-3.5 text-[#D4AF37]" />
+                    <Mail className="h-3.5 w-3.5" />
                     <span>ENVIAR PARA {SITE_CONFIG.contactEmail.toUpperCase()}</span>
                   </a>
                 </div>

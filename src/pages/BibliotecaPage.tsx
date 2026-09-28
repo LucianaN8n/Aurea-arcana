@@ -117,7 +117,7 @@ export const BibliotecaPage: React.FC<BibliotecaPageProps> = ({ onNavigate }) =>
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 max-w-4xl">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} onNavigate={onNavigate} />
               ))}

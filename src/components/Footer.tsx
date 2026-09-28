@@ -98,15 +98,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Grimório da Prosperidade
                 </button>
               </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/biblioteca/biblioteca-secreta-da-prosperidade')}
-                  className={linkClass}
-                >
-                  Biblioteca Secreta Completa
-                </button>
-              </li>
             </ul>
           </div>
 

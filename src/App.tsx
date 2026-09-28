@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import { CheckoutModal, CheckoutItemConfig } from './components/CheckoutModal';
 import { EbookReaderModal } from './components/EbookReaderModal';
 import { HomePage } from './pages/HomePage';
@@ -151,8 +150,6 @@ export default function App() {
       <main className="flex-1">{renderPage()}</main>
 
       <Footer onNavigate={navigate} />
-
-      <WhatsAppFloatingButton />
 
       <CheckoutModal
         item={checkoutItem}

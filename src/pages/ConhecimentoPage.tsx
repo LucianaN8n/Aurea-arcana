@@ -6,7 +6,6 @@ import {
   ArticleCategory,
 } from '../data/articles';
 import { SeoHead } from '../components/SeoHead';
-import { LeadCaptureSection } from '../components/LeadCaptureSection';
 
 interface ConhecimentoPageProps {
   onNavigate: (path: string) => void;
@@ -147,8 +146,6 @@ export const ConhecimentoPage: React.FC<ConhecimentoPageProps> = ({ onNavigate }
           ))}
         </div>
       </div>
-
-      <LeadCaptureSection />
     </div>
   );
 };

@@ -106,8 +106,8 @@ export const ARTICLES_DATA: ArticleItem[] = [
         ],
       },
     ],
-    relatedProductSlugs: ['magias-de-prosperidade-com-exu', 'guia-de-banhos-ervas-e-defumacoes'],
-    relatedRitualSlugs: ['abertura-de-caminhos-tradicao-exu', 'portal-da-prosperidade-10-10'],
+    relatedProductSlugs: ['magias-de-prosperidade-com-exu', 'grimorio-da-prosperidade'],
+    relatedRitualSlugs: ['portal-da-prosperidade-10-10'],
   },
   {
     id: 'art-significado-da-pemba',
@@ -155,8 +155,8 @@ export const ARTICLES_DATA: ArticleItem[] = [
         ],
       },
     ],
-    relatedProductSlugs: ['magias-de-prosperidade-com-exu', 'magias-para-abertura-de-caminhos'],
-    relatedRitualSlugs: ['abertura-de-caminhos-tradicao-exu', 'escudo-hermetico-de-protecao-e-corte'],
+    relatedProductSlugs: ['magias-de-prosperidade-com-exu', 'grimorio-da-prosperidade'],
+    relatedRitualSlugs: ['portal-da-prosperidade-10-10'],
   },
   {
     id: 'art-ervas-para-prosperidade',
@@ -204,8 +204,8 @@ export const ARTICLES_DATA: ArticleItem[] = [
         ],
       },
     ],
-    relatedProductSlugs: ['guia-de-banhos-ervas-e-defumacoes', 'grimorio-da-prosperidade'],
-    relatedRitualSlugs: ['portal-da-prosperidade-10-10', 'escudo-hermetico-de-protecao-e-corte'],
+    relatedProductSlugs: ['grimorio-da-prosperidade', 'magias-de-prosperidade-com-exu'],
+    relatedRitualSlugs: ['portal-da-prosperidade-10-10'],
   },
   {
     id: 'art-magia-planetaria-jupiter',
@@ -240,8 +240,8 @@ export const ARTICLES_DATA: ArticleItem[] = [
         ],
       },
     ],
-    relatedProductSlugs: ['magia-planetaria-e-prosperidade', 'grimorio-da-prosperidade'],
-    relatedRitualSlugs: ['portal-da-prosperidade-10-10', 'coroa-solar-poder-pessoal-e-magnetismo'],
+    relatedProductSlugs: ['grimorio-da-prosperidade', 'magias-de-prosperidade-com-exu'],
+    relatedRitualSlugs: ['portal-da-prosperidade-10-10'],
   },
   {
     id: 'art-daemons-historia-e-filosofia',
@@ -276,7 +276,7 @@ export const ARTICLES_DATA: ArticleItem[] = [
         ],
       },
     ],
-    relatedProductSlugs: ['guia-dos-daemons-associados-a-prosperidade', 'biblioteca-secreta-da-prosperidade'],
+    relatedProductSlugs: ['grimorio-da-prosperidade', 'magias-de-prosperidade-com-exu'],
     relatedRitualSlugs: ['portal-da-prosperidade-10-10'],
   },
   {
@@ -305,7 +305,7 @@ export const ARTICLES_DATA: ArticleItem[] = [
         ],
       },
     ],
-    relatedProductSlugs: ['grimorio-da-prosperidade', 'biblioteca-secreta-da-prosperidade'],
+    relatedProductSlugs: ['grimorio-da-prosperidade', 'magias-de-prosperidade-com-exu'],
     relatedRitualSlugs: ['portal-da-prosperidade-10-10'],
   },
 ];

@@ -110,9 +110,13 @@ export const RitualCard: React.FC<RitualCardProps> = ({ ritual, onNavigate }) =>
           <button
             type="button"
             onClick={() => onNavigate(`/rituais/${ritual.slug}`)}
-            className="inline-flex items-center gap-2 border border-[#D4AF37]/50 bg-[#D4AF37]/10 px-4 py-2.5 text-xs font-semibold tracking-wider text-[#F4EFE6] transition-colors hover:bg-[#D4AF37] hover:text-[#07080C] whitespace-nowrap shrink-0"
+            className={`inline-flex items-center gap-2 border px-4 py-2.5 text-xs font-semibold tracking-wider transition-colors whitespace-nowrap shrink-0 ${
+              expired
+                ? 'border-[#D4AF37]/25 bg-[#07080C] text-[#A6A29A] hover:border-[#D4AF37]/50 hover:text-[#F4EFE6]'
+                : 'border-[#D4AF37]/50 bg-[#D4AF37]/10 text-[#F4EFE6] hover:bg-[#D4AF37] hover:text-[#07080C]'
+            }`}
           >
-            <span>CONHECER</span>
+            <span>{expired ? 'INSCRIÇÕES ENCERRADAS' : 'PARTICIPAR'}</span>
             <ArrowUpRight className="h-3.5 w-3.5" />
           </button>
         </div>

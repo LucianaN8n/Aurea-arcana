@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown, CheckCircle2, MessageCircle, Mail, Clock, Shield } from 'lucide-react';
-import { SITE_CONFIG, getWhatsAppLink } from '../data/siteConfig';
+import { ChevronDown, CheckCircle2, Mail, Clock, Shield } from 'lucide-react';
+import { SITE_CONFIG } from '../data/siteConfig';
 import { SeoHead } from '../components/SeoHead';
 import { trackEvent } from '../utils/analytics';
 
@@ -102,7 +102,7 @@ export const ContatoPage: React.FC = () => {
     <div className="grimoire-grid py-16 px-4 sm:px-6 lg:px-8">
       <SeoHead
         title="Contato & Chancelaria — Atendimento Aurea Arcana"
-        description="Entre em contato com a Chancelaria da Aurea Arcana por WhatsApp ou e-mail (atendimento.sanbaoh@gmail.com) para esclarecer dúvidas sobre rituais coletivos e biblioteca digital."
+        description="Entre em contato com a Chancelaria da Aurea Arcana por e-mail (atendimento.sanbaoh@gmail.com) para esclarecer dúvidas sobre rituais coletivos e biblioteca digital."
         canonicalPath="/contato"
       />
 
@@ -118,22 +118,19 @@ export const ContatoPage: React.FC = () => {
           <div className="lg:col-span-5 space-y-6">
             <div className="border border-[#D4AF37]/25 bg-[#0B0F19] p-6">
               <div className="flex items-center gap-3 text-[#D4AF37]">
-                <MessageCircle className="h-5 w-5" />
+                <Mail className="h-5 w-5" />
                 <h2 className="font-display text-xl font-semibold text-[#F4EFE6]">
-                  WhatsApp Direto
+                  E-mail Oficial da Chancelaria
                 </h2>
               </div>
               <p className="mt-2 text-xs leading-relaxed text-[#A6A29A]">
-                Atendimento ágil para dúvidas sobre inscrições em rituais, envio de nomes para o altar e acesso aos PDFs.
+                Atendimento direto por e-mail para dúvidas sobre inscrições em rituais, envio de nomes para o altar e acesso aos PDFs da Biblioteca Digital.
               </p>
               <a
-                href={getWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent('click_whatsapp', { source: 'contact_page' })}
-                className="mt-4 inline-flex items-center gap-2 bg-[#D4AF37] px-5 py-2.5 text-xs font-semibold tracking-wider text-[#07080C]"
+                href={`mailto:${SITE_CONFIG.contactEmail}`}
+                className="mt-4 inline-flex items-center gap-2 bg-[#D4AF37] px-5 py-2.5 text-xs font-semibold tracking-wider text-[#07080C] hover:bg-[#E5C158]"
               >
-                INICIAR CONVERSA NO WHATSAPP
+                ENVIAR E-MAIL PARA A CHANCELARIA
               </a>
             </div>
 
@@ -268,7 +265,7 @@ export const FaqPage: React.FC = () => {
     },
     {
       question: 'Como entro em contato com o suporte ou atendimento?',
-      answer: `Você pode entrar em contato diretamente com nossa equipe pelo e-mail oficial ${SITE_CONFIG.contactEmail} ou através do botão de WhatsApp disponível no portal.`,
+      answer: `Você pode entrar em contato diretamente com nossa equipe pelo e-mail oficial ${SITE_CONFIG.contactEmail} ou através do formulário na página Contato & Chancelaria.`,
     },
   ];
 
@@ -351,7 +348,7 @@ export const PoliticaPrivacidadePage: React.FC = () => (
         1. Coleta de Dados e Finalidade
       </h2>
       <p>
-        Coletamos apenas os dados estritamente necessários para: (a) envio gratuito do Calendário da Prosperidade (nome, e-mail e WhatsApp); (b) entrega dos produtos digitais adquiridos na Biblioteca; e (c) inscrição nominal nos rituais coletivos (nome de batismo e data de nascimento, mantidos sob absoluto sigilo sacerdotal).
+        Coletamos apenas os dados estritamente necessários para: (a) entrega dos produtos digitais adquiridos na Biblioteca; e (b) inscrição nominal nos rituais coletivos (nome de batismo e data de nascimento, mantidos sob absoluto sigilo sacerdotal).
       </p>
       <h2 className="font-display text-2xl font-semibold text-[#D4AF37]">
         2. Sigilo dos Nomes Inscritos em Rituais

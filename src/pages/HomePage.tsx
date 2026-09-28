@@ -1,12 +1,12 @@
 import React from 'react';
-import { Calendar, Clock, ArrowRight, Sparkles, BookOpen, Shield } from 'lucide-react';
-import { getFeaturedRitual, isRitualExpired } from '../data/rituals';
+import { Calendar, Clock, ArrowRight, Sparkles, BookOpen, Shield, Lock } from 'lucide-react';
+import { getFeaturedRitual, isRitualExpired, RITUALS_DATA } from '../data/rituals';
 import { PRODUCTS_DATA } from '../data/products';
 import { ARTICLES_DATA } from '../data/articles';
 import { SITE_CONFIG } from '../data/siteConfig';
 import { CountdownTimer } from '../components/CountdownTimer';
 import { ProductCard } from '../components/ProductCard';
-import { LeadCaptureSection } from '../components/LeadCaptureSection';
+import { RitualCard } from '../components/RitualCard';
 import { SeoHead } from '../components/SeoHead';
 import { BuneSigil } from '../components/BuneSigil';
 
@@ -17,6 +17,7 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const featuredRitual = getFeaturedRitual();
   const featuredExpired = isRitualExpired(featuredRitual.isoDate);
+  const pastRituals = RITUALS_DATA.filter((r) => r.isPast);
   const featuredProducts = PRODUCTS_DATA.slice(0, 4);
   const recentArticles = ARTICLES_DATA.slice(0, 3);
 
@@ -203,6 +204,39 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
           </div>
+
+          {/* Rituais Realizados & Inscrições Encerradas */}
+          {pastRituals.length > 0 && (
+            <div className="mt-16 border-t border-[#D4AF37]/15 pt-12">
+              <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[#A6A29A]">
+                    <Lock className="h-3.5 w-3.5 text-[#D4AF37]" />
+                    <span>Histórico Litúrgico do Templo</span>
+                  </div>
+                  <h3 className="mt-1.5 font-display text-2xl sm:text-3xl font-semibold text-[#F4EFE6]">
+                    RITUAIS REALIZADOS & INSCRIÇÕES ENCERRADAS
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('/rituais')}
+                  className="inline-flex items-center gap-2 text-xs font-medium text-[#D4AF37] hover:underline whitespace-nowrap"
+                >
+                  <span>Ver histórico completo</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                {pastRituals.map((ritual) => (
+                  <div key={ritual.id} className="opacity-90">
+                    <RitualCard ritual={ritual} onNavigate={onNavigate} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -231,42 +265,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 max-w-4xl">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} onNavigate={onNavigate} />
             ))}
-          </div>
-
-          {/* Highlight Banner for the Complete Collection Combo */}
-          <div className="mt-12 border border-[#D4AF37]/35 bg-gradient-to-r from-[#0B0F19] via-[#101624] to-[#0B0F19] p-6 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-            <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-widest text-[#D4AF37]">
-                Coleção Integral · Condição Especial
-              </span>
-              <h3 className="mt-1 font-display text-2xl sm:text-3xl font-semibold text-[#F4EFE6]">
-                BIBLIOTECA SECRETA DA PROSPERIDADE (OS 6 VOLUMES REUNIDOS)
-              </h3>
-              <p className="mt-2 text-sm text-[#A6A29A]">
-                Adquira de uma só vez todos os tratados digitais do portal (mais de 950 páginas diagramadas) com acesso vitalício e pranchas bônus de horas planetárias.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 shrink-0">
-              <div>
-                <span className="block text-xs text-[#A6A29A] line-through font-mono-tabular">
-                  De R$ 432,00
-                </span>
-                <span className="font-mono-tabular text-2xl font-semibold text-[#D4AF37]">
-                  Por R$ 297,00
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => onNavigate('/biblioteca/biblioteca-secreta-da-prosperidade')}
-                className="bg-[#D4AF37] px-6 py-3.5 text-xs font-semibold tracking-wider text-[#07080C] hover:bg-[#E5C158] whitespace-nowrap"
-              >
-                CONHECER A BIBLIOTECA SECRETA
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -310,14 +312,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   </span>
                   <button
                     type="button"
-                    onClick={() => {
-                      if (step.targetUrl.startsWith('/#')) {
-                        const el = document.getElementById('captura-calendario');
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                      } else {
-                        onNavigate(step.targetUrl);
-                      }
-                    }}
+                    onClick={() => onNavigate(step.targetUrl)}
                     className="w-full border border-[#D4AF37]/40 py-2 px-3 text-xs font-medium text-[#F4EFE6] hover:bg-[#D4AF37] hover:text-[#07080C] transition-colors whitespace-nowrap truncate"
                   >
                     {step.ctaLabel}
@@ -415,9 +410,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      {/* 6. LEAD CAPTURE SECTION */}
-      <LeadCaptureSection />
     </div>
   );
 };

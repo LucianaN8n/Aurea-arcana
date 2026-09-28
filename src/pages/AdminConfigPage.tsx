@@ -4,7 +4,6 @@ import { PRODUCTS_DATA } from '../data/products';
 import { ARTICLES_DATA } from '../data/articles';
 import { SITE_CONFIG } from '../data/siteConfig';
 import { getAnalyticsHistory, subscribeAnalytics, LoggedAnalyticsEvent } from '../utils/analytics';
-import { CapturedLead } from '../components/LeadCaptureSection';
 import { SeoHead } from '../components/SeoHead';
 
 interface AdminConfigPageProps {
@@ -13,18 +12,11 @@ interface AdminConfigPageProps {
 
 export const AdminConfigPage: React.FC<AdminConfigPageProps> = ({ onNavigate }) => {
   const [events, setEvents] = useState<LoggedAnalyticsEvent[]>(() => getAnalyticsHistory());
-  const [leads, setLeads] = useState<CapturedLead[]>([]);
 
   useEffect(() => {
     const unsub = subscribeAnalytics(() => {
       setEvents(getAnalyticsHistory());
     });
-    try {
-      const saved = JSON.parse(localStorage.getItem('aurea_arcana_leads') || '[]');
-      setLeads(saved);
-    } catch {
-      setLeads([]);
-    }
     return unsub;
   }, []);
 
@@ -162,26 +154,27 @@ export const AdminConfigPage: React.FC<AdminConfigPageProps> = ({ onNavigate }) 
 
           <section className="border border-[#D4AF37]/25 bg-[#0B0F19] p-6">
             <h2 className="font-display text-2xl font-semibold text-[#F4EFE6]">
-              4. Leads Capturados ("Calendário da Prosperidade") ({leads.length})
+              4. Portal de Conhecimento ({ARTICLES_DATA.length} Artigos)
             </h2>
             <p className="mt-1 text-xs text-[#A6A29A]">
-              Artigos publicados no Portal de Conhecimento: {ARTICLES_DATA.length} artigos SEO-friendly.
+              Artigos publicados no Portal de Conhecimento: {ARTICLES_DATA.length} estudos abertos.
             </p>
             <div className="mt-4 max-h-64 overflow-y-auto space-y-2 border-t border-[#D4AF37]/15 pt-3">
-              {leads.length === 0 ? (
-                <p className="text-xs text-[#8E8980]">
-                  Nenhum lead cadastrado nesta sessão ainda. Teste o formulário na Home!
-                </p>
-              ) : (
-                leads.map((l) => (
-                  <div key={l.id} className="border border-[#D4AF37]/15 bg-[#07080C] p-3 text-xs">
-                    <div className="font-medium text-[#F4EFE6]">{l.name}</div>
-                    <div className="text-[#A6A29A] font-mono-tabular">
-                      {l.whatsapp} · {l.email} · {l.createdAt}
-                    </div>
+              {ARTICLES_DATA.map((art) => (
+                <div key={art.id} className="border border-[#D4AF37]/15 bg-[#07080C] p-3 text-xs flex items-center justify-between gap-2">
+                  <div>
+                    <div className="font-medium text-[#F4EFE6]">{art.title}</div>
+                    <div className="text-[#A6A29A]">{art.category} · {art.readTime}</div>
                   </div>
-                ))
-              )}
+                  <button
+                    type="button"
+                    onClick={() => onNavigate(`/conhecimento/${art.slug}`)}
+                    className="text-[#D4AF37] hover:underline shrink-0"
+                  >
+                    Ver →
+                  </button>
+                </div>
+              ))}
             </div>
           </section>
         </div>
