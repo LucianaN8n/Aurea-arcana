@@ -21,13 +21,36 @@ import {
 } from './pages/InstitutionalPages';
 import { AdminConfigPage } from './pages/AdminConfigPage';
 
-export default function App() {
-  const [currentPath, setCurrentPath] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return window.location.pathname || '/';
+function resolveInitialRoute(): string {
+  if (typeof window === 'undefined') return '/';
+  if (window.location.hash && window.location.hash.startsWith('#/')) {
+    return window.location.hash.slice(1);
+  }
+  const pathname = window.location.pathname || '/';
+  // Se estiver no GitHub Pages (ex: /nome-do-repo/ ou /nome-do-repo/index.html), volta para '/'
+  const knownRoutes = [
+    '/rituais',
+    '/biblioteca',
+    '/conhecimento',
+    '/sobre',
+    '/contato',
+    '/faq',
+    '/politica-de-privacidade',
+    '/termos-de-uso',
+    '/aviso-legal',
+    '/admin-config',
+  ];
+  for (const route of knownRoutes) {
+    const idx = pathname.indexOf(route);
+    if (idx !== -1) {
+      return pathname.slice(idx);
     }
-    return '/';
-  });
+  }
+  return '/';
+}
+
+export default function App() {
+  const [currentPath, setCurrentPath] = useState<string>(resolveInitialRoute);
 
   const [checkoutItem, setCheckoutItem] = useState<CheckoutItemConfig | null>(null);
   const [activeEbookSlug, setActiveEbookSlug] = useState<string | null>(null);
@@ -35,18 +58,27 @@ export default function App() {
   const navigate = useCallback((path: string) => {
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
     if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', cleanPath);
+      const isGitHubPages = window.location.hostname.endsWith('github.io');
+      if (isGitHubPages) {
+        window.location.hash = cleanPath;
+      } else {
+        window.history.pushState({}, '', cleanPath);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     setCurrentPath(cleanPath);
   }, []);
 
   useEffect(() => {
-    const onPopState = () => {
-      setCurrentPath(window.location.pathname || '/');
+    const onRouteChange = () => {
+      setCurrentPath(resolveInitialRoute());
     };
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
+    window.addEventListener('popstate', onRouteChange);
+    window.addEventListener('hashchange', onRouteChange);
+    return () => {
+      window.removeEventListener('popstate', onRouteChange);
+      window.removeEventListener('hashchange', onRouteChange);
+    };
   }, []);
 
   const renderPage = () => {
